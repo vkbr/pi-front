@@ -13,7 +13,7 @@
   "scripts": {
     "start": "serve -s build -l 3443",
     "dev": "PORT=3443 react-scripts start",
-    "build": "PORT=3443 react-scripts build",
+    "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
