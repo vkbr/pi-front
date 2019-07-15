@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import React from 'react';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 import { makeStyles } from '@material-ui/styles';
 
-import SystemHealthWidget from '../widgets/SystemHealth';
-import Clock from '../widgets/Clock';
-import WidgetTabs from '../widgets/WigetTabs';
+import Home from './Home';
+import Admin from './Admin';
 
 const useClasses = makeStyles(() => ({
 	'@global': {
@@ -11,70 +11,17 @@ const useClasses = makeStyles(() => ({
 			height: '100%',
 		},
 	},
-	container: {
-		display: 'flex',
-		height: '100%',
-	},
-	content: {
-		display: 'flex',
-		flex: 1,
-		flexDirection: 'column',
-
-		'& > div': {
-			display: 'flex',
-			flex: 1,
-			justifyContent: 'center',
-			alignItems: 'center',
-			fontSize: '5em',
-		},
-	},
-	tabs: {
-		width: 50,
-		background: '#444',
-	},
 }));
 
-const MAX_TAB = 1;
-const useTabManager = () => {
-	let timer = null;
-	const [currentTab, setTab] = useState(0);
+const Routes = () => {
+	useClasses();
 
-	let showNextTab;
-
-	// useEffect(() => {
-	showNextTab = () => {
-		if (currentTab === MAX_TAB) {
-			setTab(0);
-		} else {
-			setTab(currentTab + 1);
-		}
-	};
-	// });
-
-	const autoTimeoutShowNext = () => {
-		clearTimeout(timer);
-		timer = setTimeout(showNextTab, 5000);
-	};
-
-	autoTimeoutShowNext();
-
-	return [currentTab, autoTimeoutShowNext];
-};
-
-const App = () => {
-	const classes = useClasses({});
-	const [currentTab, resetAutoShowNextTab] = useTabManager();
-	console.log({ currentTab });
-	
-  return (
-    <div className={classes.container}>
-      <div className={classes.content}>
-				{currentTab === 0 && <SystemHealthWidget resetTimer={resetAutoShowNextTab} />}
-				{currentTab === 1 && <Clock resetTimer={resetAutoShowNextTab} />}
-			</div>
-			<WidgetTabs tabIndex={currentTab} />
-    </div>
-  );
+	return (
+		<Router>
+			<Route path="/" exact component={Home} />
+			<Route path="/admin" exact component={Admin} />
+		</Router>
+	);
 }
 
-export default App;
+export default Routes;

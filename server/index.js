@@ -15,7 +15,7 @@ fastly.register(fastifyStatic, {
 const { getCPUTemp } = require('./utils/linux');
 
 fastly.get('/data/system', (req, reply) => {
-	getCPUTemp(temp => reply.type('application/json').send({ temp }));
+	getCPUTemp(data => reply.type('application/json').send(data));
 });
 
 fastly.get('*', (req, reply) => {

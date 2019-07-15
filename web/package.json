@@ -11,7 +11,7 @@
     "react-scripts": "3.0.1"
   },
   "scripts": {
-    "start": "serve -s build -l 3443",
+    "start": "echo 'Use \"yarn dev\" instead'; exit 0",
     "dev": "PORT=3443 react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
