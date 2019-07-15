@@ -1,6 +1,10 @@
 #!/bin/bash
 
-kill $(cat ../server/pid)
+set -e
+
+kill $(cat ../server/pid) || true
+
+cd $(dirname ${BASH_SOURCE[0]})
 
 cd ../web
 yarn

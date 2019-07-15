@@ -4,6 +4,10 @@ cd ../server
 
 yarn start &
 
-ehco $1 > pid
+ehco $! > pid
 
-chromium-browser --start-fullscreen --app=http://localhost:3444
+sleep 3;
+
+if [[ "$OSTYPE" == "linux-gnu"* ]]; then
+	chromium-browser --start-fullscreen --app=http://localhost:3444 & ;
+else
