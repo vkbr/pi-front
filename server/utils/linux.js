@@ -3,6 +3,10 @@ var os = require('os');
 
 const units = ['', 'K', 'M', 'G', 'T'];
 
+function fix(num = 0) {
+	return num.toFixed(1).replace(/\.?0*$/, '');
+}
+
 function mem() {
 	let max = os.totalmem();
 	let usage = max - os.freemem();
@@ -17,9 +21,9 @@ function mem() {
 	}
 
 	return {
-		max: `${max.toFixed(2)}${units[unitMax]}`,
-		usage: `${usage.toFixed(2)}${units[unitUsage]}`,
-		usagePer: `${(usage/max).toFixed(2)}%`
+		max: `${fix(max)}${units[unitMax]}`,
+		usage: `${fix(usage)}${units[unitUsage]}`,
+		usagePer: `${fix((usage/max) * 100)}%`
 	};
 }
 
@@ -39,7 +43,7 @@ module.exports.getCPUTemp = (cb) => {
 		cb({
 			temp,
 			ram: mem(),
-			cpu: `${(((max-idleTotal) * 100) / max).toFixed(2)}%`,
+			cpu: `${fix(((max-idleTotal) * 100) / max)}%`,
 		});
 	}
 	

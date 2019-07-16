@@ -14,7 +14,7 @@ const useClasses = makeStyles({
 		color: '#ccc',
 	},
 	dateDay: {
-		color: '#d99',
+		color: '#f77',
 	},
 	time: {
 		fontFamily: '"Courier New", Courier, monospace'

@@ -14,13 +14,13 @@ const useClasses = makeStyles(() => ({
 		display: 'flex',
 		flex: 1,
 		flexDirection: 'column',
+		fontSize: '6em',
 
 		'& > div': {
 			display: 'flex',
 			flex: 1,
 			justifyContent: 'center',
 			alignItems: 'center',
-			fontSize: '6em',
 		},
 	},
 	tabs: {
