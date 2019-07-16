@@ -5,10 +5,10 @@ echo "In directory $PWD"
 
 yarn start &
 
-ehco $! > pid
+echo $! > pid
 
 sleep 3;
 
-if [[ "$OSTYPE" == "linux-gnu"* ]]; then
+if [[ `uname` == "Linux" ]]; then
 	chromium-browser --start-fullscreen --app=http://localhost:3444 &
 else
