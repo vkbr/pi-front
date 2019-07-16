@@ -1,8 +1,9 @@
 #!/bin/bash
 
 cd ../server &&
+echo "In directory $PWD"
 
-npm start &
+yarn start &
 
 ehco $! > pid
 

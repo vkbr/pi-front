@@ -5,12 +5,15 @@ set -x
 kill $(cat ../server/pid) || true &&
 
 cd $(dirname ${BASH_SOURCE[0]}) &&
+echo "In directory $PWD"
 
-cd ../web &&
-npm ci &&
-npm run build &&
+cd ../web
+echo "In directory $PWD"
+yarn 
+yarn build
 
 cd ../server &&
-npm ci &&
+echo "In directory $PWD"
+yarn
 
 bash ../scripts/run.sh
