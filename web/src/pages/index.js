@@ -14,7 +14,7 @@ const useClasses = makeStyles(() => ({
 }));
 
 const Routes = () => {
-	useClasses();
+	useClasses({});
 
 	return (
 		<Router>
