@@ -1,6 +1,6 @@
 #!/bin/bash
 
-set -e
+set -x
 
 kill $(cat ../server/pid) || true
 
