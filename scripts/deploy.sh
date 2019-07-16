@@ -7,10 +7,10 @@ kill $(cat ../server/pid) || true
 cd $(dirname ${BASH_SOURCE[0]})
 
 cd ../web
-yarn install --pure-lockfile --frozen-lockfile;
-yarn build --pure-lockfile --frozen-lockfile;
+npm ci;
+npm run build;
 
 cd ../server
-yarn install --pure-lockfile --frozen-lockfile;
+npm ci;
 
 bash ../scripts/run.sh

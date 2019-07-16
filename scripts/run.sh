@@ -2,7 +2,7 @@
 
 cd ../server
 
-yarn start &
+npm start &
 
 ehco $! > pid
 
