@@ -7,10 +7,10 @@ kill $(cat ../server/pid) || true
 cd $(dirname ${BASH_SOURCE[0]})
 
 cd ../web
-yarn
-yarn build
+yarn install;
+yarn build;
 
 cd ../server
-yarn
+yarn install;
 
 bash ../scripts/run.sh
