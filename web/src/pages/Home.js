@@ -3,6 +3,7 @@ import { makeStyles } from '@material-ui/styles';
 
 import SystemHealthWidget from '../widgets/SystemHealth';
 import Clock from '../widgets/Clock';
+import Weather from '../widgets/Weather';
 import WidgetTabs from '../widgets/WigetTabs';
 
 const useClasses = makeStyles(() => ({
@@ -29,7 +30,7 @@ const useClasses = makeStyles(() => ({
 	},
 }));
 
-const MAX_TAB = 1;
+const MAX_TAB = 2;
 const useTabManager = () => {
 	let timer = null;
 	const [currentTab, setTab] = useState(0);
@@ -58,14 +59,15 @@ const useTabManager = () => {
 
 const App = () => {
 	const classes = useClasses({});
-	const [currentTab, resetAutoShowNextTab] = useTabManager();
+	const [currentTab] = useTabManager();
 	console.log({ currentTab });
 	
   return (
     <div className={classes.container}>
       <div className={classes.content}>
-				{currentTab === 0 && <SystemHealthWidget resetTimer={resetAutoShowNextTab} />}
-				{currentTab === 1 && <Clock resetTimer={resetAutoShowNextTab} />}
+				{currentTab === 0 && <SystemHealthWidget />}
+				{currentTab === 1 && <Clock />}
+				{currentTab === 2 && <Weather />}
 			</div>
 			<WidgetTabs tabIndex={currentTab} />
     </div>

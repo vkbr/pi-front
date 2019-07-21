@@ -1,6 +1,7 @@
 import React from 'react';
 import MemoryIcon from '@material-ui/icons/Memory';
 import TimerIcon from '@material-ui/icons/AccessTime';
+import FilterDramaIcon from '@material-ui/icons/FilterDrama';
 import { makeStyles } from '@material-ui/styles';
 import PropTypes from 'prop-types';
 
@@ -20,13 +21,16 @@ const useClasses = makeStyles({
 
 		'& > svg': {
 			color: '#aaa',
-			transition: 'color 0.5s ease-out',
+			transition: 'color 0.4s ease-out',
 
 			'&.active-red': {
 				color: '#f77',
 			},
 			'&.active-blue': {
 				color: '#77f',
+			},
+			'&.active-green': {
+				color: '#7f7',
 			},
 		},
 	},
@@ -40,6 +44,7 @@ const WidgetTabs = ({ tabIndex }) => {
 			<div className={classes.grid}>
 				<MemoryIcon className={tabIndex === 0 ? 'active-red' : ''} />
 				<TimerIcon className={tabIndex === 1 ? 'active-blue' : ''} />
+				<FilterDramaIcon className={tabIndex === 2 ? 'active-green' : ''} />
 			</div>
 		</div>
 	);

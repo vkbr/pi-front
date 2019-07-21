@@ -1,7 +1,7 @@
 const os = require('os');
 const { spawn } = require('child_process');
 
-const fix = require('./format');
+const { fix } = require('./format');
 
 const units = ['', 'K', 'M', 'G', 'T'];
 
