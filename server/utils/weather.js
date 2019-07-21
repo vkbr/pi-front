@@ -1,13 +1,11 @@
 const axios = require('axios').default;
 
-const { fix } = require('./format');
-
 const axiosForecast = axios.create({
-	baseURL: 'http://api.openweathermap.org/data/2.5/forecast?id=2673722&APPID=f87dce92cdfb9be1f5aaa0e5ba47fe74&units=metric',
+	baseURL: 'http://api.openweathermap.org/data/2.5/forecast?id=2673722&APPID=5651211f67b21a33255f8083326da7d0&units=metric',
 });
 
 const axiosToday = axios.create({
-	baseURL: 'http://api.openweathermap.org/data/2.5/weather?id=2673722&APPID=f87dce92cdfb9be1f5aaa0e5ba47fe74&units=metric',
+	baseURL: 'http://api.openweathermap.org/data/2.5/weather?id=2673722&APPID=5651211f67b21a33255f8083326da7d0&units=metric',
 });
 
 const REFRESH_TIME_NOR = 1800000; // 30 min => ms

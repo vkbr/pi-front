@@ -14,6 +14,9 @@ fastly.register(fastifyStatic, {
 
 const { getCPUTemp } = require('./utils/linux');
 const { getWeatherInfo } = require('./utils/weather');
+const { updateAndRestart } = require('./utils/maintenance');
+
+fastly.get('/health', (req, reply) => reply.send('ok'));
 
 fastly.get('/data/system', (req, reply) => {
 	getCPUTemp(data => reply.type('application/json').send(data));
@@ -22,6 +25,12 @@ fastly.get('/data/system', (req, reply) => {
 fastly.get('/data/weather', (req, reply) => {
 	reply.type('application/json').send(getWeatherInfo());
 });
+
+fastly.get('/api/admin/update-app', (req, reply) => {
+	const stream = updateAndRestart(fastly);
+
+	reply.type('text/plain').send(stream);
+})
 
 fastly.get('*', (req, reply) => {
 	reply.type('text/html');

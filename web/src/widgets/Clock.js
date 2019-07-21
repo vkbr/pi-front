@@ -22,7 +22,6 @@ const useClasses = makeStyles({
 });
 
 const months = 'Jan,Feb,Mar,Apr,May,Jun,Jul,Aug,Sep,Oct,Nov,Dec'.split(',');
-console.log(months)
 
 const Clock = () => {
 	const [now, setDate] = useState(new Date());

@@ -19,7 +19,7 @@ const Routes = () => {
 	return (
 		<Router>
 			<Route path="/" exact component={Home} />
-			<Route path="/admin" exact component={Admin} />
+			<Route path="/admin" component={Admin} />
 		</Router>
 	);
 }
