@@ -1,11 +1,9 @@
+const os = require('os');
 const { spawn } = require('child_process');
-var os = require('os');
+
+const fix = require('./format');
 
 const units = ['', 'K', 'M', 'G', 'T'];
-
-function fix(num = 0) {
-	return num.toFixed(1).replace(/\.?0*$/, '');
-}
 
 function mem() {
 	let max = os.totalmem();

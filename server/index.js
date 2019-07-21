@@ -13,9 +13,14 @@ fastly.register(fastifyStatic, {
 });
 
 const { getCPUTemp } = require('./utils/linux');
+const { getWeatherInfo } = require('./utils/weather');
 
 fastly.get('/data/system', (req, reply) => {
 	getCPUTemp(data => reply.type('application/json').send(data));
+});
+
+fastly.get('/data/weather', (req, reply) => {
+	reply.type('application/json').send(getWeatherInfo());
 });
 
 fastly.get('*', (req, reply) => {
