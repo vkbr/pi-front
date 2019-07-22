@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { makeStyles } from '@material-ui/styles';
 import PropTypes from 'prop-types';
 
@@ -10,7 +10,8 @@ const useClasses = makeStyles({
 		color: '#999',
 	},
 	date: {
-		fontSize: '0.5em',
+		fontSize: '0.6em',
+		lineHeight: '0.6em',
 		color: '#ccc',
 	},
 	dateDay: {
@@ -21,33 +22,16 @@ const useClasses = makeStyles({
 	},
 });
 
-const months = 'Jan,Feb,Mar,Apr,May,Jun,Jul,Aug,Sep,Oct,Nov,Dec'.split(',');
+const Clock = ({ day, month, year, hour, min, sec }) => {
+	const classes = useClasses({});
 
-const Clock = () => {
-	const [now, setDate] = useState(new Date());
-	const classes = useClasses();
-
-	useEffect(() => {
-		setTimeout(() => {
-			setDate(new Date());
-		}, 1000);
-	});
-
-	const hour = now.getHours().toString().padStart(2, '0');
-	const min = now.getMinutes().toString().padStart(2, '0');
-	const sec = now.getSeconds().toString().padStart(2, '0');
-
-	const day = now.getDate().toString().padStart(2, '0');
-	const mon = now.getMonth();
-	const year = now.getFullYear().toString().substr(2);
-	
 	return (
 		<div className={classes.container}>
 			<div>
 				<div className={classes.date}>
 					<span className={classes.dateDay}>{day}</span>
 					<span>&nbsp;</span>
-					<span>{months[mon]}</span>
+					<span>{month}</span>
 					<span>&nbsp;</span>
 					<span>'{year}</span>
 				</div>
@@ -64,7 +48,12 @@ const Clock = () => {
 }
 
 Clock.propTypes = {
-	resetTimer: PropTypes.func.isRequired,
+	day: PropTypes.number.isRequired,
+	month: PropTypes.string.isRequired,
+	year: PropTypes.string.isRequired,
+	hour: PropTypes.number.isRequired,
+	min: PropTypes.number.isRequired,
+	sec: PropTypes.number.isRequired,
 };
 
 export default Clock;

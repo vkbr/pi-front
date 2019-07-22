@@ -16,12 +16,13 @@ const useClasses = makeStyles({
 	grid: {
 		display: 'grid',
 		gridTemplateColumns: '1fr',
-		gridGap: 10,
+		gridGap: 15,
 		height: 'fit-content',
 
 		'& > svg': {
 			color: '#aaa',
 			transition: 'color 0.4s ease-out',
+			fontSize: '2em',
 
 			'&.active-red': {
 				color: '#f77',
