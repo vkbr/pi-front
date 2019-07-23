@@ -2,7 +2,7 @@ import React from 'react';
 import { InputAdornment, TextField, Typography, FormControlLabel, Checkbox } from '@material-ui/core';
 
 import WidgetPreviewSetting from './WidgetPreviewSetting';
-import SystemsHealthWidget from '../../widgets/SystemHealth';
+import SystemsHealthWidget from '../../widgets/SystemHealth/SystemHealth';
 import { RowDark } from '../common/Row';
 
 const CpuWidgetSetting = () => (
@@ -13,7 +13,7 @@ const CpuWidgetSetting = () => (
 		<RowDark>
 			<FormControlLabel
 				label="Enabled"
-				control={<Checkbox />}
+				control={<Checkbox checked />}
 			/>
 		</RowDark>
 
@@ -27,7 +27,7 @@ const CpuWidgetSetting = () => (
 				}}
 			/>
 			<div className="info spaced">
-				Base font size for all your widget. This can be overriden by each widget.
+				This will override global setting.
 			</div>
 		</RowDark>
 
@@ -41,13 +41,10 @@ const CpuWidgetSetting = () => (
 				}}
 			/>
 			<div className="info spaced">
-				Base font size for all your widget. This can be overriden by each widget.
+				This will override global setting.
 			</div>
 		</RowDark>
 	</WidgetPreviewSetting>
 );
-
-CpuWidgetSetting.propTypes = {
-};
 
 export default CpuWidgetSetting;

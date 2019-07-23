@@ -13,7 +13,7 @@ const CpuWidgetSetting = () => (
 		<RowDark>
 			<FormControlLabel
 				label="Enabled"
-				control={<Checkbox />}
+				control={<Checkbox checked />}
 			/>
 		</RowDark>
 
@@ -27,7 +27,7 @@ const CpuWidgetSetting = () => (
 				}}
 			/>
 			<div className="info spaced">
-				Base font size for all your widget. This can be overriden by each widget.
+				This will override global setting.
 			</div>
 		</RowDark>
 
@@ -41,7 +41,7 @@ const CpuWidgetSetting = () => (
 				}}
 			/>
 			<div className="info spaced">
-				Base font size for all your widget. This can be overriden by each widget.
+				This will override global setting.
 			</div>
 		</RowDark>
 	</WidgetPreviewSetting>

@@ -49,7 +49,7 @@ const AdminNav = (props) => {
 				</ListItemIcon>
 				<ListItemText primary="Widgets" />
 			</ListItemLink>
-			<ListItemLink to="/maintenance" path={location.pathname}>
+			<ListItemLink to="/admin/maintenance" path={location.pathname}>
 				<ListItemIcon>
 					<MaintenanceIcon />
 				</ListItemIcon>

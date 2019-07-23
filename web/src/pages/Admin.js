@@ -53,6 +53,7 @@ const Admin = () => {
 				<main className={classes.content}>
 					<Route exact path="/admin" component={AdminHome} />
 					<Route path="/admin/widgets" component={AdminWidgets} />
+					<Route path="/admin/maintenance" component={AdminWidgets} />
 				</main>
 			</div>
 		</ThemeProvider>
