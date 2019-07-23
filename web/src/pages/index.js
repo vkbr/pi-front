@@ -1,27 +1,44 @@
-import React from 'react';
+import React, { PureComponent } from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
-import { makeStyles } from '@material-ui/styles';
+import { withStyles } from '@material-ui/styles';
 
 import Home from './Home';
 import Admin from './Admin';
+import config from '../config';
+import { AppThemeProvider } from '../utils/Theme';
 
-const useClasses = makeStyles(() => ({
+const withClasses = withStyles({
 	'@global': {
 		'html, body, #root' : {
 			height: '100%',
 		},
 	},
-}));
+});
 
-const Routes = () => {
-	useClasses({});
+class Routes extends PureComponent {
+	state = {
+		theme: null,
+	};
 
-	return (
-		<Router>
-			<Route path="/" exact component={Home} />
-			<Route path="/admin" component={Admin} />
-		</Router>
-	);
+	componentDidMount() {
+		fetch(`${config.API_HOST}/api/theme-data`)
+			.then(resp => resp.json())
+			.then(theme => this.setState({ theme }))
+			.catch(err => console.error(err));
+	}
+
+	render() {
+		const { theme } = this.state;
+
+		return (
+			<AppThemeProvider theme={theme}>
+				<Router>
+					<Route path="/" exact component={() => <Home theme={theme} />}  />
+					<Route path="/admin" component={Admin} />
+				</Router>
+			</AppThemeProvider>
+		);
+	}
 }
 
-export default Routes;
+export default withClasses(Routes);

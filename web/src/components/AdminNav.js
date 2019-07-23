@@ -1,6 +1,9 @@
 import React from 'react';
+import HomeIcon from '@material-ui/icons/Home';
+import WidgetIcon from '@material-ui/icons/Widgets';
+import MaintenanceIcon from '@material-ui/icons/Memory';
 import { Link, withRouter } from 'react-router-dom';
-import { List, ListItem } from '@material-ui/core';
+import { List, ListItem, ListItemIcon, ListItemText } from '@material-ui/core';
 import { makeStyles } from '@material-ui/styles';
 import { yellow } from '@material-ui/core/colors';
 
@@ -35,10 +38,22 @@ const AdminNav = (props) => {
 	return (
 		<List>
 			<ListItemLink to="/admin" path={location.pathname}>
-				Home
+				<ListItemIcon>
+					<HomeIcon />
+				</ListItemIcon>
+				<ListItemText primary="Home" />
 			</ListItemLink>
 			<ListItemLink to="/admin/widgets" path={location.pathname}>
-				Widgets
+				<ListItemIcon>
+					<WidgetIcon />
+				</ListItemIcon>
+				<ListItemText primary="Widgets" />
+			</ListItemLink>
+			<ListItemLink to="/maintenance" path={location.pathname}>
+				<ListItemIcon>
+					<MaintenanceIcon />
+				</ListItemIcon>
+				<ListItemText primary="Maintenance" />
 			</ListItemLink>
 		</List>
 	);

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { makeStyles} from '@material-ui/styles';
-import { FormControlLabel, Checkbox, TextField } from '@material-ui/core';
+import { FormControlLabel, Checkbox, TextField, FormLabel, InputLabel, Typography, InputAdornment } from '@material-ui/core';
 
 import adminDefaultConfig from '../../config/adminDefaultConfigs.json';
 
@@ -56,9 +56,10 @@ const AdminHome = () => {
 			<h1 className={classes.title}>Settings</h1>
 			<div className={classes.row}>
 				<div className="info">
-					Settings are saved at <code>~/.pifrontrc</code>
+					Settings are saved at <code>~/.pifront</code>
 				</div>
 			</div>
+
 			<div className={classes.row}>
 				<FormControlLabel
 					label="Enable config"
@@ -70,10 +71,28 @@ const AdminHome = () => {
 			</div>
 
 			<div className={classes.row}>
+				<Typography>Base font size</Typography>
 				<TextField
-					label="Screen time"
 					type="number"
 					InputLabelProps={{ shrink: true }}
+					InputProps={{
+						endAdornment: <InputAdornment position="end">px</InputAdornment>
+					}}
+					{...makeControlledTextfield('baseFontSize')}
+				/>
+				<div className="info spaced">
+					Base font size for all your widget. This can be overriden by each widget.
+				</div>
+			</div>
+
+			<div className={classes.row}>
+				<Typography>Screen time</Typography>
+				<TextField
+					type="number"
+					InputLabelProps={{ shrink: true }}
+					InputProps={{
+						endAdornment: <InputAdornment position="end">ms</InputAdornment>
+					}}
 					{...makeControlledTextfield('screenTime')}
 				/>
 				<div className="info spaced">

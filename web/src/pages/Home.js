@@ -5,8 +5,14 @@ import SystemHealthWidget from '../widgets/SystemHealth';
 import Clock from '../widgets/Clock';
 import Weather from '../widgets/Weather';
 import WidgetTabs from '../widgets/WigetTabs';
+import { AppThemeProvider } from '../utils/Theme';
 
-const useClasses = makeStyles(() => ({
+const useClasses = makeStyles(({ baseFontSize }) => ({
+	'@global': {
+		'html, body': {
+			fontSize: baseFontSize,
+		},
+	},
 	container: {
 		display: 'flex',
 		height: '100%',
@@ -49,7 +55,7 @@ const useTabManager = () => {
 
 	const autoTimeoutShowNext = () => {
 		clearTimeout(timer);
-		timer = setTimeout(showNextTab, 5000);
+		timer = setTimeout(showNextTab, 5000 * 1000);
 	};
 
 	autoTimeoutShowNext();
@@ -57,20 +63,26 @@ const useTabManager = () => {
 	return [currentTab, autoTimeoutShowNext];
 };
 
-const App = () => {
-	const classes = useClasses({});
+const App = ({ theme }) => {
 	const [currentTab] = useTabManager();
-	console.log({ currentTab });
+	const classes = useClasses({ baseFontSize: theme === null ? 1 : theme.baseFontSize });
+
+	if (theme === null) {
+		return null;
+	}
+
 	
   return (
-    <div className={classes.container}>
-      <div className={classes.content}>
-				{currentTab === 0 && <SystemHealthWidget />}
-				{currentTab === 1 && <Clock />}
-				{currentTab === 2 && <Weather />}
+    <AppThemeProvider theme={theme}>
+			<div className={classes.container}>
+				<div className={classes.content}>
+					{currentTab === 0 && <SystemHealthWidget />}
+					{currentTab === 1 && <Clock />}
+					{currentTab === 2 && <Weather />}
+				</div>
+				<WidgetTabs tabIndex={currentTab} />
 			</div>
-			<WidgetTabs tabIndex={currentTab} />
-    </div>
+		</AppThemeProvider>
   );
 }
 
