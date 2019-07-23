@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { makeStyles} from '@material-ui/styles';
-import { FormControlLabel, Checkbox, TextField, FormLabel, InputLabel, Typography, InputAdornment } from '@material-ui/core';
+import { FormControlLabel, Checkbox, TextField, Typography, InputAdornment } from '@material-ui/core';
 
+import Row from '../common/Row';
 import adminDefaultConfig from '../../config/adminDefaultConfigs.json';
 
 const useClasses = makeStyles({
@@ -11,20 +12,6 @@ const useClasses = makeStyles({
 		marginTop: 0,
 		borderBottom: '1px solid #444',
 		fontWeight: 'normal',
-	},
-	row: {
-		marginBottom: 20,
-
-		'& .info': {
-			color: '#999',
-			backgroundColor: '#222',
-			padding: 20,
-			borderRadius: 3,
-
-			'&.spaced': {
-				marginTop: 10,
-			},
-		},
 	},
 });
 
@@ -54,13 +41,13 @@ const AdminHome = () => {
 	return (
 		<div className={classes.container}>
 			<h1 className={classes.title}>Settings</h1>
-			<div className={classes.row}>
+			<Row>
 				<div className="info">
 					Settings are saved at <code>~/.pifront</code>
 				</div>
-			</div>
+			</Row>
 
-			<div className={classes.row}>
+			<Row>
 				<FormControlLabel
 					label="Enable config"
 					control={<Checkbox checked {...makeControlledCheckbox('isEnabled')} />}
@@ -68,9 +55,9 @@ const AdminHome = () => {
 				<div className="info">
 					If disabled, default configs will be used.
 				</div>
-			</div>
+			</Row>
 
-			<div className={classes.row}>
+			<Row>
 				<Typography>Base font size</Typography>
 				<TextField
 					type="number"
@@ -83,9 +70,9 @@ const AdminHome = () => {
 				<div className="info spaced">
 					Base font size for all your widget. This can be overriden by each widget.
 				</div>
-			</div>
+			</Row>
 
-			<div className={classes.row}>
+			<Row>
 				<Typography>Screen time</Typography>
 				<TextField
 					type="number"
@@ -98,7 +85,7 @@ const AdminHome = () => {
 				<div className="info spaced">
 					Widget change time.
 				</div>
-			</div>
+			</Row>
 		</div>
 	);
 };

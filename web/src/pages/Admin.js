@@ -33,6 +33,7 @@ const useClasses = makeStyles({
 	content: {
 		flex: 1,
 		padding: 20,
+		overflow: 'auto',
 	},
 });
 

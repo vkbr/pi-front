@@ -2,13 +2,13 @@ import React from 'react';
 import { InputAdornment, TextField, Typography, FormControlLabel, Checkbox } from '@material-ui/core';
 
 import WidgetPreviewSetting from './WidgetPreviewSetting';
-import SystemsHealthWidget from '../../widgets/SystemHealth';
+import ClockHealthWidget from '../../widgets/Clock';
 import { RowDark } from '../common/Row';
 
 const CpuWidgetSetting = () => (
 	<WidgetPreviewSetting
-		PreviewWidget={SystemsHealthWidget}
-		previewProps={{ cpu: '20%', ramUsagePer: '30%', temp: '60' }}
+		PreviewWidget={ClockHealthWidget}
+		previewProps={{}}
 	>
 		<RowDark>
 			<FormControlLabel

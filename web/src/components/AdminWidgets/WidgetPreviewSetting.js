@@ -17,17 +17,27 @@ const useClasses = makeStyles({
 	},
 	previewWrapper: {
 		width: 240,
+		height: 160,
 	},
 	previewContainer: ({ baseFontSize }) => ({
 		fontSize: baseFontSize,
 		width: 480,
-		// boxShadow: '0 0 10px 0 #000',
+		height: 320,
 		transform: 'scale(0.5)',
 		transformOrigin: '0 0',
 		backgroundColor: '#111',
+		display: 'flex',
+		borderRadius: 4,
+		
+		'& > div': {
+			flex: 1,
+			display: 'flex',
+			alignItems: 'center',
+			justifyContent: 'center',
+		},
 	}),
 	content: {
-		felx: 1,
+		flex: 1,
 		paddingLeft: 20,
 	},
 });
