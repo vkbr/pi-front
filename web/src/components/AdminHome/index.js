@@ -3,7 +3,7 @@ import { makeStyles} from '@material-ui/styles';
 import { FormControlLabel, Checkbox, TextField, Typography, InputAdornment } from '@material-ui/core';
 
 import Row from '../common/Row';
-import adminDefaultConfig from '../../config/adminDefaultConfigs.json';
+import adminDefaultConfig from '../../config/defaultSettings.json';
 
 const useClasses = makeStyles({
 	container: {},

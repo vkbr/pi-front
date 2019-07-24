@@ -33,7 +33,7 @@ fastify.get('/api/admin/update-app', (req, reply) => {
 	reply.type('text/plain').send(stream);
 })
 
-fastify.get('/api/theme-data', (req, reply) => {
+fastify.get('/api/settings-data', (req, reply) => {
 	readSettingsFile()
 		.then(data => reply.type('application/json').send(data));
 });

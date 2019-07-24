@@ -5,7 +5,6 @@ import SystemHealthWidget from '../widgets/SystemHealth';
 import Clock from '../widgets/Clock';
 import Weather from '../widgets/Weather';
 import WidgetTabs from '../widgets/WigetTabs';
-import { AppThemeProvider } from '../utils/Theme';
 
 const useClasses = makeStyles(({ baseFontSize }) => ({
 	'@global': {
@@ -63,26 +62,19 @@ const useTabManager = () => {
 	return [currentTab, autoTimeoutShowNext];
 };
 
-const App = ({ theme }) => {
+const App = () => {
 	const [currentTab] = useTabManager();
-	const classes = useClasses({ baseFontSize: theme === null ? 1 : theme.baseFontSize });
+	const classes = useClasses({ baseFontSize: 96 }); //theme === null ? 1 : theme.baseFontSize
 
-	if (theme === null) {
-		return null;
-	}
-
-	
   return (
-    <AppThemeProvider theme={theme}>
-			<div className={classes.container}>
-				<div className={classes.content}>
-					{currentTab === 0 && <SystemHealthWidget />}
-					{currentTab === 1 && <Clock />}
-					{currentTab === 2 && <Weather />}
-				</div>
-				<WidgetTabs tabIndex={currentTab} />
+		<div className={classes.container}>
+			<div className={classes.content}>
+				{currentTab === 0 && <SystemHealthWidget />}
+				{currentTab === 1 && <Clock />}
+				{currentTab === 2 && <Weather />}
 			</div>
-		</AppThemeProvider>
+			<WidgetTabs tabIndex={currentTab} />
+		</div>
   );
 }
 

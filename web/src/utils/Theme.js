@@ -1,6 +1,6 @@
 import React from 'react';
 
-import adminDefaultConfigs from '../config/adminDefaultConfigs.json';
+import adminDefaultConfigs from '../config/defaultSettings.json';
 
 const { Provider, Consumer } = React.createContext(adminDefaultConfigs);
 
