@@ -8,6 +8,7 @@ import Admin from './Admin';
 import config from '../config';
 import createStore from '../store/createStore';
 import { fetchSettings } from '../store/admin';
+import { registerStore } from '../utils';
 
 const withClasses = withStyles({
 	'@global': {
@@ -18,6 +19,8 @@ const withClasses = withStyles({
 });
 
 const store = createStore();
+
+registerStore(store);
 
 class Routes extends PureComponent {
 	componentDidMount() {
