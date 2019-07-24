@@ -10,7 +10,6 @@ const createAdminInputController = (valueKey, valueExtractor) => (settingKey, de
 	useEffect(() => {
 		const unsubscribe = subscribeToStore(() => {
 			const nextValue = getSetting(settingKey, getState());
-			console.log(parser, parser(nextValue));
 			if (value !== nextValue) setValue(nextValue);
 		});
 
