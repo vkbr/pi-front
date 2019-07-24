@@ -41,12 +41,30 @@ export const fetchSettings = () => dispatch => api.getSettings().then(settings =
 	settings,
 }));
 
-export const getSetting = (key, { admin }) => admin.stagedSettings[key] || admin.settings[key];
+export const getSetting = (key, { admin }) => {
+	const stagedValue = admin.stagedSettings[key];
+	if (stagedValue !== undefined) {
+		return stagedValue;
+	}
+	const { settings } = admin;
+	const adminSetting = settings[key];
 
-export const createSettingsProvider = keys => ({ admin }) => keys.reduce((prev, key) => ({
-	...prev,
-	[key]: admin.stagedSettings[key] || admin.settings[key]
-}), {});
+	if (adminSetting !== undefined) {
+		return adminSetting;
+	}
+
+	if (key.startsWith('w.')) {
+		return settings[key.split('.').slice(2).join('.')];
+	}
+};
+
+export const createSettingsProvider = keys => ({ admin }) => keys.reduce((prev, key) => {
+	const stagedValue = admin.stagedSettings[key];
+	return {
+		...prev,
+		[key]: stagedValue !== undefined ? stagedValue : admin.settings[key]
+	};
+}, {});
 
 export const updateValue = (key, value) => ({
 	type: ActionTypes.UpdateValue,

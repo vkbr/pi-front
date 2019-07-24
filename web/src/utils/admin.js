@@ -3,13 +3,15 @@ import { useState, useEffect } from 'react';
 import { dispatchToStore, getState, subscribeToStore } from '.';
 import { getSetting, updateValue } from '../store/admin';
 
-const createAdminInputController = (valueKey, valueExtractor) => (settingKey) => {
-	const [value, setValue] = useState(getSetting(settingKey, getState()));
+const createAdminInputController = (valueKey, valueExtractor) => (settingKey, defaultValue, parser = v => v) => {
+	const valueFromStore = getSetting(settingKey, getState());
+	const [value, setValue] = useState(valueFromStore === undefined ? defaultValue : valueFromStore);
 
 	useEffect(() => {
 		const unsubscribe = subscribeToStore(() => {
 			const nextValue = getSetting(settingKey, getState());
-			if (value !== nextValue) setValue(value);
+			console.log(parser, parser(nextValue));
+			if (value !== nextValue) setValue(nextValue);
 		});
 
 		return () => unsubscribe();
@@ -17,7 +19,7 @@ const createAdminInputController = (valueKey, valueExtractor) => (settingKey) =>
 
 	return {
 		[valueKey]: value,
-		onChange: e => dispatchToStore(updateValue(settingKey, valueExtractor(e))),
+		onChange: e => dispatchToStore(updateValue(settingKey, parser(valueExtractor(e)))),
 	};
 };
 
