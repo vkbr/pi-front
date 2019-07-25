@@ -18,7 +18,7 @@ const WeatherWidgetSetting = () => {
 	const screenTimeController = useAdminTextController('w.weather.screenTime', 5000, Number);
 	const apiKeyController = useAdminTextController('w.weather.apiKey', '');
 
-	const hasApiKey = apiKeyController.value !== undefined;
+	const hasApiKey = !!apiKeyController.value;
 
 
 	return (
@@ -46,7 +46,7 @@ const WeatherWidgetSetting = () => {
 						<Checkbox
 							onChange={isEnableController.onChange}
 							disabled={!hasApiKey}
-							checked={hasApiKey ? apiKeyController.checked : false} />
+							checked={hasApiKey ? isEnableController.checked : false} />
 					)}
 				/>
 				<div className="info">Requires API key to work</div>

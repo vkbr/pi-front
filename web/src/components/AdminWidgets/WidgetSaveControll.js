@@ -1,6 +1,9 @@
 import React from 'react';
+import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { makeStyles, Button, Typography } from '@material-ui/core';
+
+import { saveStagedChanges } from '../../store/admin';
 
 const useClasses = makeStyles({
 	container: {
@@ -12,7 +15,7 @@ const useClasses = makeStyles({
 	},
 });
 
-const WidgetSaveController = ({ hasNoUnsavedValues }) => {
+const WidgetSaveController = ({ hasNoUnsavedValues, saveStagedChanges }) => {
 	const classes = useClasses({});
 	
 	return (
@@ -21,6 +24,7 @@ const WidgetSaveController = ({ hasNoUnsavedValues }) => {
 				disabled={hasNoUnsavedValues}
 				color="primary"
 				variant="contained"
+				onClick={saveStagedChanges}
 			>Save</Button>
 			{hasNoUnsavedValues && (
 				<Typography variant="caption" className={classes.subtext}>All caught up</Typography>
@@ -29,6 +33,12 @@ const WidgetSaveController = ({ hasNoUnsavedValues }) => {
 	);
 };
 
-export default connect(({ admin }) => ({
+const mapStateToProps = ({ admin }) => ({
 	hasNoUnsavedValues: Object.keys(admin.stagedSettings).length === 0,
-}))(WidgetSaveController);
+});
+
+const mapDispatchToProps = dispatch => bindActionCreators({
+	saveStagedChanges,
+}, dispatch);
+
+export default connect(mapStateToProps, mapDispatchToProps)(WidgetSaveController);

@@ -14,7 +14,7 @@ fastify.register(fastifyStatic, {
 
 const { getCPUTemp } = require('./utils/linux');
 const { updateAndRestart } = require('./utils/maintenance');
-const { readSettingsFile } = require('./utils/settings');
+const { readSettingsFile, writeSettingToFile } = require('./utils/settings');
 const { getWeatherInfo } = require('./utils/weather');
 
 fastify.get('/health', (req, reply) => reply.send('ok'));
@@ -36,6 +36,12 @@ fastify.get('/api/admin/update-app', (req, reply) => {
 fastify.get('/api/settings-data', (req, reply) => {
 	readSettingsFile()
 		.then(data => reply.type('application/json').send(data));
+});
+
+fastify.post('/api/write-settings', (req, reply) => {
+	writeSettingToFile(req.body)
+		.catch(console.error)
+		.then(() => reply.send('ok'));
 });
 
 fastify.get('*', (req, reply) => {
