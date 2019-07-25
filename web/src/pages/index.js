@@ -5,7 +5,6 @@ import { withStyles } from '@material-ui/styles';
 
 import Home from './Home';
 import Admin from './Admin';
-import config from '../config';
 import createStore from '../store/createStore';
 import { fetchSettings } from '../store/admin';
 import { registerStore } from '../utils';
@@ -14,6 +13,15 @@ const withClasses = withStyles({
 	'@global': {
 		'html, body, #root' : {
 			height: '100%',
+		},
+		a: {
+			color: '#f77',
+			fontWeight: 'bold',
+			textDecoration: 'none',
+
+			'&:hover': {
+				color: '#e66',
+			},
 		},
 	},
 });

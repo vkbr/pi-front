@@ -14,7 +14,7 @@ const CpuWidgetSetting = () => {
 	return (
 		<WidgetPreviewSetting
 			PreviewWidget={SystemsHealthWidget}
-			previewProps={{ cpu: '20%', ramUsagePer: '30%', temp: '60' }}
+			previewProps={{ cpu: '20%', ramUsagePer: '30%', ramMax: '4G', temp: '60' }}
 		>
 			<RowDark>
 				<FormControlLabel

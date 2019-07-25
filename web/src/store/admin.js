@@ -6,9 +6,12 @@ const initialState = {
 	settings: {
 		...defaultSettings,
 	},
+	isSaving: false,
 };
 
 const ActionTypes = {
+	CommitStagedChanges: 'adm/CommitStagedChanges',
+	SetIsSaving: 'adm/SetIsSaving',
 	UpdateSettings: 'adm/UpdateSettings',
 	UpdateValue: 'adm/UpdateValue',
 };
@@ -30,6 +33,20 @@ export default (state = initialState, action) => {
 					...state.stagedSettings,
 					[action.key]: action.value,
 				},
+			};
+		case ActionTypes.SetIsSaving:
+			return {
+				...state,
+				isSaving: action.isSaving,
+			};
+		case ActionTypes.CommitStagedChanges:
+			return {
+				...state,
+				settings: {
+					...state.settings,
+					...state.stagedSettings,
+				},
+				stagedSettings: {},
 			};
 		default:
 			return state;
@@ -71,3 +88,29 @@ export const updateValue = (key, value) => ({
 	key,
 	value,
 });
+
+const setIsSaving = isSaving => ({
+	type: ActionTypes.SetIsSaving,
+	isSaving,
+});
+
+const commitStagedChanges = () => ({
+	type: ActionTypes.CommitStagedChanges,
+});
+
+export const saveStagedChanges = () => (dispatch, getState) => {
+	dispatch(setIsSaving(true));
+	const { admin } = getState();
+	
+	const setting = {
+		...admin.settings,
+		...admin.stagedSettings,
+	};
+
+	api.saveSettings(setting)
+		.then(() => {
+			dispatch(commitStagedChanges());
+		})
+		.catch(console.error)
+		.then(() => dispatch(setIsSaving(false)));
+};

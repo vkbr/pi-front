@@ -4,48 +4,57 @@ import { InputAdornment, TextField, Typography, FormControlLabel, Checkbox } fro
 import WidgetPreviewSetting from './WidgetPreviewSetting';
 import ClockHealthWidget from '../../widgets/Clock';
 import { RowDark } from '../common/Row';
+import { useAdminTextController, useAdminCheckboxController } from '../../utils/admin';
 
-const CpuWidgetSetting = () => (
-	<WidgetPreviewSetting
-		PreviewWidget={ClockHealthWidget}
-		previewProps={{}}
-	>
-		<RowDark>
-			<FormControlLabel
-				label="Enabled"
-				control={<Checkbox checked />}
-			/>
-		</RowDark>
+const CpuWidgetSetting = () => {
+	const isEnableController = useAdminCheckboxController('w.clock.isEnable', true);
+	const baseFontSizeController = useAdminTextController('w.clock.styles.baseFontSize', 100, Number);
+	const screenTimeController = useAdminTextController('w.clock.screenTime', 5000, Number);
 
-		<RowDark>
-			<Typography>Base font size</Typography>
-			<TextField
-				type="number"
-				InputLabelProps={{ shrink: true }}
-				InputProps={{
-					endAdornment: <InputAdornment position="end">px</InputAdornment>
-				}}
-			/>
-			<div className="info spaced">
-				This will override global setting.
-			</div>
-		</RowDark>
+	return (
+		<WidgetPreviewSetting
+			PreviewWidget={ClockHealthWidget}
+			previewProps={{}}
+		>
+			<RowDark>
+				<FormControlLabel
+					label="Enabled"
+					control={<Checkbox {...isEnableController} />}
+				/>
+			</RowDark>
 
-		<RowDark>
-			<Typography>Screen time</Typography>
-			<TextField
-				type="number"
-				InputLabelProps={{ shrink: true }}
-				InputProps={{
-					endAdornment: <InputAdornment position="end">ms</InputAdornment>
-				}}
-			/>
-			<div className="info spaced">
-				This will override global setting.
-			</div>
-		</RowDark>
-	</WidgetPreviewSetting>
-);
+			<RowDark>
+				<Typography>Base font size</Typography>
+				<TextField
+					type="number"
+					InputLabelProps={{ shrink: true }}
+					InputProps={{
+						endAdornment: <InputAdornment position="end">px</InputAdornment>
+					}}
+					{...baseFontSizeController}
+				/>
+				<div className="info spaced">
+					This will override global setting.
+				</div>
+			</RowDark>
+
+			<RowDark>
+				<Typography>Screen time</Typography>
+				<TextField
+					type="number"
+					InputLabelProps={{ shrink: true }}
+					InputProps={{
+						endAdornment: <InputAdornment position="end">ms</InputAdornment>
+					}}
+					{...screenTimeController}
+				/>
+				<div className="info spaced">
+					This will override global setting.
+				</div>
+			</RowDark>
+		</WidgetPreviewSetting>
+	);
+};
 
 CpuWidgetSetting.propTypes = {
 };

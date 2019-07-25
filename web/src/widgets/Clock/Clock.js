@@ -48,12 +48,12 @@ const Clock = ({ day, month, year, hour, min, sec }) => {
 }
 
 Clock.propTypes = {
-	day: PropTypes.number.isRequired,
+	day: PropTypes.string.isRequired,
 	month: PropTypes.string.isRequired,
 	year: PropTypes.string.isRequired,
-	hour: PropTypes.number.isRequired,
-	min: PropTypes.number.isRequired,
-	sec: PropTypes.number.isRequired,
+	hour: PropTypes.string.isRequired,
+	min: PropTypes.string.isRequired,
+	sec: PropTypes.string.isRequired,
 };
 
 export default Clock;
