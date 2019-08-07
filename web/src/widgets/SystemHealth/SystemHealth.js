@@ -25,6 +25,11 @@ const wrapStyles = withStyles({
 		fontSize: '0.4em',
 		height: 70,
 		alignItems: 'center',
+		display: 'flex',
+
+		'& > div': {
+			flex: 1,
+		},
 	},
 });
 
