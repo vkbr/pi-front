@@ -4,13 +4,17 @@ import ClockPresentation from './Clock';
 
 const months = 'Jan,Feb,Mar,Apr,May,Jun,Jul,Aug,Sep,Oct,Nov,Dec'.split(',');
 
+let timer;
+
 const Clock = () => {
 	const [now, setDate] = useState(new Date());
 
 	useEffect(() => {
-		setTimeout(() => {
+		timer = setTimeout(() => {
 			setDate(new Date());
 		}, 1000);
+
+		return () => clearTimeout(timer);
 	});
 
 	const hour = now.getHours().toString().padStart(2, '0');

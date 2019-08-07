@@ -7,6 +7,7 @@ import { Route } from 'react-router-dom';
 import AdminHome from '../components/AdminHome';
 import AdminWidgets from '../components/AdminWidgets';
 import AdminNav from '../components/AdminNav';
+import Maintenance from './Maintenance';
 
 
 const theme = createMuiTheme({
@@ -54,7 +55,7 @@ const Admin = () => {
 				<main className={classes.content}>
 					<Route exact path="/admin" component={AdminHome} />
 					<Route path="/admin/widgets" component={AdminWidgets} />
-					<Route path="/admin/maintenance" component={AdminWidgets} />
+					<Route path="/admin/maintenance" component={Maintenance} />
 				</main>
 			</div>
 		</ThemeProvider>

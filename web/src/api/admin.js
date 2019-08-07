@@ -2,7 +2,7 @@ import { api } from ".";
 
 export const getSettings = () => api('/api/settings-data');
 
-export const saveSettings = setting => console.log(setting, typeof setting) || api('/api/write-settings', {
+export const saveSettings = setting => api('/api/write-settings', {
 	method: 'post',
 	body: JSON.stringify(setting),
 	headers: {

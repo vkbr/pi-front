@@ -1,46 +1,19 @@
-import React, { useState } from 'react';
-import { makeStyles} from '@material-ui/styles';
+import React from 'react';
 import { FormControlLabel, Checkbox, TextField, Typography, InputAdornment } from '@material-ui/core';
 
 import Row from '../common/Row';
-import adminDefaultConfig from '../../config/defaultSettings.json';
-
-const useClasses = makeStyles({
-	container: {},
-	title: {
-		fontSize: '2em',
-		marginTop: 0,
-		borderBottom: '1px solid #444',
-		fontWeight: 'normal',
-	},
-});
-
-const useAdminForm = () => {
-	const [form, setConfig] = useState(adminDefaultConfig);
-
-	const makeControlledCheckbox = fieldName => ({
-		checked: form[fieldName],
-		onChange: e => setConfig({ ...form, [fieldName]: e.target.checked }),
-	});
-
-	const makeControlledTextfield = fieldName => ({
-		value: form[fieldName],
-		onChange: e => setConfig({ ...form, [fieldName]: e.target.value }),
-	});
-
-	return {
-		makeControlledCheckbox,
-		makeControlledTextfield,
-	};
-};
+import { useAdminCheckboxController, useAdminTextController } from '../../utils/admin';
+import WidgetSaveControll from '../common/WidgetSaveControll';
+import Title from '../common/Title';
 
 const AdminHome = () => {
-	const { makeControlledCheckbox, makeControlledTextfield } = useAdminForm({});
-	const classes = useClasses({});
+	const isEnabledController = useAdminCheckboxController('isEnabled', true);
+	const baseFontSizeController = useAdminTextController('styles.baseFontSize');
+	const screenTimeController = useAdminTextController('screenTime');
 	
 	return (
-		<div className={classes.container}>
-			<h1 className={classes.title}>Settings</h1>
+		<div>
+			<Title>Settings</Title>
 			<Row>
 				<div className="info">
 					Settings are saved at <code>~/.pifront</code>
@@ -50,7 +23,7 @@ const AdminHome = () => {
 			<Row>
 				<FormControlLabel
 					label="Enable config"
-					control={<Checkbox checked {...makeControlledCheckbox('isEnabled')} />}
+					control={<Checkbox checked {...isEnabledController} />}
 				/>
 				<div className="info">
 					If disabled, default configs will be used.
@@ -65,7 +38,7 @@ const AdminHome = () => {
 					InputProps={{
 						endAdornment: <InputAdornment position="end">px</InputAdornment>
 					}}
-					{...makeControlledTextfield('baseFontSize')}
+					{...baseFontSizeController}
 				/>
 				<div className="info spaced">
 					Base font size for all your widget. This can be overriden by each widget.
@@ -80,12 +53,14 @@ const AdminHome = () => {
 					InputProps={{
 						endAdornment: <InputAdornment position="end">ms</InputAdornment>
 					}}
-					{...makeControlledTextfield('screenTime')}
+					{...screenTimeController}
 				/>
 				<div className="info spaced">
 					Widget change time.
 				</div>
 			</Row>
+
+			<WidgetSaveControll />
 		</div>
 	);
 };

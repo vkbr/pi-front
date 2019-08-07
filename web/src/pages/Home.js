@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { makeStyles } from '@material-ui/styles';
 
 import SystemHealthWidget from '../widgets/SystemHealth';
@@ -40,24 +40,25 @@ const useTabManager = () => {
 	let timer = null;
 	const [currentTab, setTab] = useState(0);
 
-	let showNextTab;
-
-	// useEffect(() => {
-	showNextTab = () => {
-		if (currentTab === MAX_TAB) {
-			setTab(0);
-		} else {
-			setTab(currentTab + 1);
-		}
+	const setTimer = () => {
+		timer = setTimeout(showNextTab, 5000 * 1000);
+		return timer;
 	};
-	// });
+
+	let showNextTab = () => {
+		setTab((currentTab + 1) % MAX_TAB);
+
+		setTimer();
+	};
+
+	useEffect(() => {
+		setTimer();
+	}, []);
 
 	const autoTimeoutShowNext = () => {
 		clearTimeout(timer);
-		timer = setTimeout(showNextTab, 5000 * 1000);
+		setTimer();
 	};
-
-	autoTimeoutShowNext();
 
 	return [currentTab, autoTimeoutShowNext];
 };
