@@ -34,9 +34,9 @@ const useClasses = makeStyles({
 	},
 });
 
-const MAX_TAB = 0;
+const MAX_TAB = 3;
+let timer = null;
 const useTabManager = () => {
-	let timer = null;
 	const [currentTab, setTab] = useState(0);
 
 	const setTimer = () => {
@@ -46,20 +46,13 @@ const useTabManager = () => {
 
 	let showNextTab = () => {
 		setTab((currentTab + 1) % MAX_TAB);
-
-		setTimer();
 	};
 
 	useEffect(() => {
 		setTimer();
-	}, []);
+	}, [currentTab]);
 
-	const autoTimeoutShowNext = () => {
-		clearTimeout(timer);
-		setTimer();
-	};
-
-	return [currentTab, autoTimeoutShowNext];
+	return [currentTab];
 };
 
 const getFontSize = getSetting('styles.baseFontSize');
