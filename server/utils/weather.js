@@ -1,12 +1,39 @@
 const axios = require('axios').default;
+const { readSettingsFile } = require('./settings');
 
-const axiosForecast = axios.create({
-	baseURL: 'http://api.openweathermap.org/data/2.5/forecast?id=2673722&APPID=5651211f67b21a33255f8083326da7d0&units=metric',
-});
+const getWeartherApiKey = () => readSettingsFile()
+	.then(buffer => buffer instanceof Buffer ? JSON.parse(buffer.toString()) : {})
+	.then((settings) => {
+		if (settings && settings['w.weather.apiKey'] !== undefined) {
+			getAppId = () => Promise.resolve(settings['w.weather.apiKey']);
 
-const axiosToday = axios.create({
-	baseURL: 'http://api.openweathermap.org/data/2.5/weather?id=2673722&APPID=5651211f67b21a33255f8083326da7d0&units=metric',
-});
+			return getAppId();
+		} else {
+			setTimeout(getAppId, 30000);
+		}
+	});
+
+let getAppId = getWeartherApiKey;
+
+let axiosForecast = (APPID) => {
+	const forecast = axios.create({
+		baseURL: `http://api.openweathermap.org/data/2.5/forecast?id=2673722&APPID=${APPID}&units=metric`,
+	});
+
+	axiosForecast = () => forecast;
+
+	return forecast;
+}
+
+let axiosToday = (APPID) => {
+	const today = axios.create({
+		baseURL: `http://api.openweathermap.org/data/2.5/weather?id=2673722&APPID=${APPID}&units=metric`,
+	});
+
+	axiosToday = () => today;
+
+	return today;
+}
 
 const REFRESH_TIME_NOR = 1800000; // 30 min => ms
 const REFRESH_TIME_ERR = 60000; // 1 min => ms
@@ -19,8 +46,10 @@ const matchDDMMYY = (d1, d2) => d1.getDate() === d2.getDate()
 	&& d1.getMonth() === d2.getMonth()
 	&& d1.getFullYear() === d2.getFullYear();
 
-function updateWeatherInfo() {
-	Promise.all([axiosForecast.get(''), axiosToday.get('')])
+async function updateWeatherInfo() {
+	const APPID = await getAppId();
+
+	Promise.all([axiosForecast(APPID).get(''), axiosToday(APPID).get('')])
 		.then(([forecast, today]) => {
 			const data = weatherInfo;
 
