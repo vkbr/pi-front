@@ -34,13 +34,13 @@ const useClasses = makeStyles({
 	},
 });
 
-const MAX_TAB = 2;
+const MAX_TAB = 0;
 const useTabManager = () => {
 	let timer = null;
 	const [currentTab, setTab] = useState(0);
 
 	const setTimer = () => {
-		timer = setTimeout(showNextTab, 5000 * 1000);
+		timer = setTimeout(showNextTab, 5000);
 		return timer;
 	};
 
