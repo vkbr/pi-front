@@ -1,6 +1,8 @@
 import React, { PureComponent } from 'react';
+import { connect } from 'react-redux';
 
 import WeatherPresemt from './Weather';
+import { getSetting } from '../../store/admin';
 
 let weatherData = {
 	today: {
@@ -31,17 +33,20 @@ class Weather extends PureComponent {
 	}
 	render() {
 		const { weather } = this.state;
+		const { baseFontSize } = this.props;
 
 		return (
 			<WeatherPresemt
 				weatherToday={weather.today}
 				weatherTomorrow={weather['+1']}
+				styles={{ baseFontSize }}
 			/>
 		);
 	}
 }
 
-Weather.propTypes = {
-};
+const getBaseFont = getSetting('w.system.styles.baseFontSize');
 
-export default Weather;
+export default connect(state => ({
+	baseFontSize: getBaseFont(state),
+}))(Weather);

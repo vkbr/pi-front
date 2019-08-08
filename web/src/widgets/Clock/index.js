@@ -1,12 +1,16 @@
 import React, { useState, useEffect } from 'react';
+import { shallowEqual, useSelector } from 'react-redux';
 
 import ClockPresentation from './Clock';
+import { getSetting } from '../../store/admin';
 
 const months = 'Jan,Feb,Mar,Apr,May,Jun,Jul,Aug,Sep,Oct,Nov,Dec'.split(',');
 
 let timer;
+const getBaseFont = getSetting('w.clock.styles.baseFontSize');
 
 const Clock = () => {
+	const baseFontSize = useSelector(getBaseFont, shallowEqual);
 	const [now, setDate] = useState(new Date());
 
 	useEffect(() => {
@@ -33,6 +37,7 @@ const Clock = () => {
 			hour={hour}
 			min={min}
 			sec={sec}
+			styles={{ baseFontSize }}
 		/>
 	);
 }

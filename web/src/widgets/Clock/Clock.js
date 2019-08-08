@@ -3,9 +3,10 @@ import { makeStyles } from '@material-ui/styles';
 import PropTypes from 'prop-types';
 
 const useClasses = makeStyles({
-	container: {
+	container: ({ baseFontSize }) => ({
 		flexDirection: 'column',
-	},
+		fontSize: baseFontSize,
+	}),
 	sec: {
 		color: '#999',
 	},
@@ -22,8 +23,8 @@ const useClasses = makeStyles({
 	},
 });
 
-const Clock = ({ day, month, year, hour, min, sec }) => {
-	const classes = useClasses({});
+const Clock = ({ day, month, year, hour, min, sec, styles }) => {
+	const classes = useClasses(styles);
 
 	return (
 		<div className={classes.container}>

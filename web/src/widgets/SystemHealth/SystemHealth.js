@@ -1,20 +1,21 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { withStyles } from '@material-ui/styles';
+import { makeStyles } from '@material-ui/styles';
 import ProgressInfo from '../../components/ProgressInfo';
 
-const wrapStyles = withStyles({
+const useClasses = makeStyles({
 	sup: {
 		marginTop: '-1em',
 		fontSize: '0.5em',
 	},
-	container: {
+	container: ({ baseFontSize }) => ({
 		flexDirection: 'column',
+		fontSize: baseFontSize,
 
 		'& > div': {
 			width: '100%',
 		},
-	},
+	}),
 	temp: {
 		flex: 1,
 		display: 'flex',
@@ -33,7 +34,9 @@ const wrapStyles = withStyles({
 	},
 });
 
-const SystemHealth = ({ classes, ramUsagePer, ramMax, temp, cpu }) => {
+const SystemHealth = ({ ramUsagePer, ramMax, temp, cpu, styles }) => {
+	const classes = useClasses(styles);
+
 	return (
 		<div className={classes.container}>
 			<div className={classes.infoUsage}>
@@ -67,4 +70,4 @@ SystemHealth.propTypes = {
 	temp: PropTypes.string.isRequired,
 };
 
-export default wrapStyles(SystemHealth);
+export default SystemHealth;

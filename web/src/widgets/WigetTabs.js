@@ -3,7 +3,9 @@ import MemoryIcon from '@material-ui/icons/Memory';
 import TimerIcon from '@material-ui/icons/AccessTime';
 import FilterDramaIcon from '@material-ui/icons/FilterDrama';
 import { makeStyles } from '@material-ui/styles';
+import { shallowEqual, useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
+import { getSetting } from '../store/admin';
 
 const useClasses = makeStyles({
 	container: {
@@ -13,7 +15,7 @@ const useClasses = makeStyles({
 		padding: '0 5px',
 		backgroundColor: '#333',
 	},
-	grid: {
+	grid: ({ iconSize }) => ({
 		display: 'grid',
 		gridTemplateColumns: '1fr',
 		gridGap: 15,
@@ -22,7 +24,7 @@ const useClasses = makeStyles({
 		'& > svg': {
 			color: '#aaa',
 			transition: 'color 0.4s ease-out',
-			fontSize: '2em',
+			fontSize: iconSize,
 
 			'&.active-red': {
 				color: '#f77',
@@ -34,11 +36,14 @@ const useClasses = makeStyles({
 				color: '#7f7',
 			},
 		},
-	},
+	}),
 });
 
+const getFontSize = getSetting('styles.iconSize');
+
 const WidgetTabs = ({ tabIndex }) => {
-	const classes = useClasses({});
+	const iconSize = useSelector(getFontSize, shallowEqual);
+	const classes = useClasses({ iconSize });
 
 	return (
 		<div className={classes.container}>

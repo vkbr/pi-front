@@ -3,9 +3,10 @@ import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/styles';
 
 const useClasses = makeStyles({
-	container: {
+	container: ({ baseFontSize }) => ({
 		padding: '0 10px',
-	},
+		fontSize: baseFontSize,
+	}),
 	weather: {
 		flex: 1,
 		minWidth: 0,
@@ -35,8 +36,8 @@ const useClasses = makeStyles({
 	},
 });
 
-const Weather = ({ weatherToday, weatherTomorrow }) => {
-	const classes = useClasses({});
+const Weather = ({ weatherToday, weatherTomorrow, styles }) => {
+	const classes = useClasses(styles);
 	
 	return (
 		<div className={classes.container}>

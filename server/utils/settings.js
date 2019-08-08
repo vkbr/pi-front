@@ -12,9 +12,6 @@ function readSettingsFile() {
 }
 
 function writeSettingToFile(data) {
-	console.log(data);
-	console.log(typeof data);
-	console.log(JSON.stringify(data, null, 2));
 	return fs.writeFile(RC_FILE_PATH, JSON.stringify(data, null, 2));
 }
 

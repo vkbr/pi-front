@@ -1,6 +1,8 @@
 import React, { PureComponent } from 'react';
+import { connect } from 'react-redux';
 
 import SystemHealthPresent from './SystemHealth';
+import { getSetting } from '../../store/admin';
 
 let oldData = {
 	temp: '00.00',
@@ -29,6 +31,7 @@ class SystemHealth extends PureComponent {
 
 	render() {
 		const { temp, cpu, ram } = this.state;
+		const { baseFontSize } = this.props;
 
 		return (
 			<SystemHealthPresent
@@ -36,10 +39,14 @@ class SystemHealth extends PureComponent {
 				ramMax={ram.max}
 				temp={temp}
 				cpu={cpu}
+				styles={{ baseFontSize }}
 			/>
 		);
 	}
 }
 
+const getBaseFont = getSetting('w.system.styles.baseFontSize');
 
-export default SystemHealth;
+export default connect(state => ({
+	baseFontSize: getBaseFont(state),
+}))(SystemHealth);
