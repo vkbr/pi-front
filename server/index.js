@@ -41,7 +41,7 @@ fastify.get('/api/settings-data', (req, reply) => {
 fastify.post('/api/write-settings', (req, reply) => {
 	writeSettingToFile(req.body)
 		.catch(console.error)
-		.then(() => reply.send('ok'));
+		.then(() => reply.send({ isError: false }));
 });
 
 fastify.get('*', (req, reply) => {
