@@ -8,7 +8,8 @@ import Title from '../common/Title';
 
 const AdminHome = () => {
 	const isEnabledController = useAdminCheckboxController('isEnabled', true);
-	const baseFontSizeController = useAdminTextController('styles.baseFontSize');
+	const baseFontSizeController = useAdminTextController('styles.baseFontSize', 96, Number);
+	const iconSizeController = useAdminTextController('styles.iconSize', 30, Number);
 	const screenTimeController = useAdminTextController('screenTime');
 	
 	return (
@@ -42,6 +43,21 @@ const AdminHome = () => {
 				/>
 				<div className="info spaced">
 					Base font size for all your widget. This can be overriden by each widget.
+				</div>
+			</Row>
+
+			<Row>
+				<Typography>Nav icon size</Typography>
+				<TextField
+					type="number"
+					InputLabelProps={{ shrink: true }}
+					InputProps={{
+						endAdornment: <InputAdornment position="end">px</InputAdornment>
+					}}
+					{...iconSizeController}
+				/>
+				<div className="info spaced">
+					Base font size for Icons on right nav menu.
 				</div>
 			</Row>
 

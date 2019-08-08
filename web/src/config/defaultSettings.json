@@ -2,6 +2,7 @@
 	"isEnabled": true,
 	"screenTime": 5000,
 	"styles.baseFontSize": 96,
+	"styles.iconSize": 30,
 	"w.system.isEnable": true,
 	"w.clock.isEnable": true,
 	"w.weather.isEnable": true

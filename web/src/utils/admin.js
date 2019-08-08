@@ -4,12 +4,12 @@ import { dispatchToStore, getState, subscribeToStore } from '.';
 import { getSetting, updateValue } from '../store/admin';
 
 const createAdminInputController = (valueKey, valueExtractor) => (settingKey, defaultValue, parser = v => v) => {
-	const valueFromStore = getSetting(settingKey, getState());
+	const valueFromStore = getSetting(settingKey)(getState());
 	const [value, setValue] = useState(valueFromStore === undefined ? defaultValue : valueFromStore);
 
 	useEffect(() => {
 		const unsubscribe = subscribeToStore(() => {
-			const nextValue = getSetting(settingKey, getState());
+			const nextValue = getSetting(settingKey)(getState());
 			if (value !== nextValue) setValue(nextValue);
 		});
 

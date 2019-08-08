@@ -58,7 +58,7 @@ export const fetchSettings = () => dispatch => api.getSettings().then(settings =
 	settings,
 }));
 
-export const getSetting = (key, { admin }) => {
+export const getSetting = key => ({ admin }) => {
 	const stagedValue = admin.stagedSettings[key];
 	if (stagedValue !== undefined) {
 		return stagedValue;
