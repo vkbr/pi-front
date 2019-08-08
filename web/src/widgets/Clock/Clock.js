@@ -1,9 +1,13 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/styles';
 import PropTypes from 'prop-types';
+import { getTransition } from '../../utils/widgets';
+
+const transition = getTransition();
 
 const useClasses = makeStyles({
 	container: ({ baseFontSize }) => ({
+		transition,
 		flexDirection: 'column',
 		fontSize: baseFontSize,
 	}),

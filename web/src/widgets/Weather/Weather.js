@@ -1,9 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/styles';
+import { getTransition } from '../../utils/widgets';
+
+const transition = getTransition();
 
 const useClasses = makeStyles({
 	container: ({ baseFontSize }) => ({
+		transition,
 		padding: '0 10px',
 		fontSize: baseFontSize,
 	}),

@@ -7,12 +7,13 @@ import Clock from '../widgets/Clock';
 import Weather from '../widgets/Weather';
 import WidgetTabs from '../widgets/WigetTabs';
 import { getSetting } from '../store/admin';
+import { startSettingsIntervalSync, clearSettingsIntervalSync } from '../utils/widgets';
 
 const useClasses = makeStyles({
 	container: ({ baseFontSize }) => ({
 		display: 'flex',
 		height: '100%',
-		// fontSize: baseFontSize,
+		fontSize: baseFontSize,
 	}),
 	content: {
 		display: 'flex',
@@ -67,6 +68,12 @@ const App = () => {
 	const [currentTab] = useTabManager();
 	const baseFontSize = useSelector(getFontSize, shallowEqual);
 	const classes = useClasses({ baseFontSize }); //theme === null ? 1 : theme.baseFontSize
+
+	useEffect(() => {
+		startSettingsIntervalSync();
+
+		return clearSettingsIntervalSync;
+	}, []);
 
   return (
 		<div className={classes.container}>

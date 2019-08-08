@@ -2,6 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/styles';
 import ProgressInfo from '../../components/ProgressInfo';
+import { getTransition } from '../../utils/widgets';
+
+const transition = getTransition();
 
 const useClasses = makeStyles({
 	sup: {
@@ -9,6 +12,7 @@ const useClasses = makeStyles({
 		fontSize: '0.5em',
 	},
 	container: ({ baseFontSize }) => ({
+		transition,
 		flexDirection: 'column',
 		fontSize: baseFontSize,
 
