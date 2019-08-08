@@ -44,11 +44,14 @@ fastify.post('/api/write-settings', (req, reply) => {
 		.then(() => reply.send({ isError: false }));
 });
 
-fastify.get('*', (req, reply) => {
+const serverSite = (req, reply) => {
 	reply.type('text/html');
 	fs.readFile(path.resolve('../web/build/index.html'), (err, data) => {
 		reply.send(data.toString());
 	});
-});
+};
+
+fastify.get('/admin', serverSite);
+fastify.get('*', serverSite);
 
 fastify.listen(3444, '0.0.0.0', (err, addr) => console.log(err ? `Error: ${err}` : `listening at ${addr}`))
