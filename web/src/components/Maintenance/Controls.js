@@ -2,6 +2,7 @@ import React from 'react';
 import { FormControlLabel, Checkbox, Button } from '@material-ui/core';
 
 import Row from '../common/Row';
+import { updateAndRestart } from '../../api/admin';
 
 const Controls = () => (
 	<div>
@@ -15,7 +16,7 @@ const Controls = () => (
 		</Row>
 
 		<Row>
-			<Button color="primary">Update the system</Button>
+			<Button color="primary" onClick={updateAndRestart}>Update the system</Button>
 			<div className="info">Check for update, apply and restart.</div>
 		</Row>
 	</div>

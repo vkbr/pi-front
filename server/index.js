@@ -4,6 +4,7 @@ const fastifyCors = require('fastify-cors');
 const fastifyStatic = require('fastify-static');
 const fastify = require('fastify')({
 	logger: false,
+	ignoreTrailingSlash: true,
 });
 
 fastify.register(fastifyCors);
@@ -52,6 +53,11 @@ const serverSite = (req, reply) => {
 };
 
 fastify.get('/admin', serverSite);
-fastify.get('*', serverSite);
+fastify.get('/', serverSite);
+// fastify.route({
+// 	url: '/*',
+// 	method: 'GET',
+// 	handler: serverSite,
+// });
 
 fastify.listen(3444, '0.0.0.0', (err, addr) => console.log(err ? `Error: ${err}` : `listening at ${addr}`))

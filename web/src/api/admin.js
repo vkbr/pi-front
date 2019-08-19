@@ -9,3 +9,5 @@ export const saveSettings = setting => api('/api/write-settings', {
 		'Content-Type': 'application/json',
 	},
 });
+
+export const updateAndRestart = () => api('/api/admin/update-app');
