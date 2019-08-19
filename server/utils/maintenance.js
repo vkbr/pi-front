@@ -42,7 +42,7 @@ function spawnPromise(stream, cmd, args, options) {
 }
 
 async function update(stream, root) {
-	stream.writeNl('+++++DIR');
+	stream.writeNl('+++++DIR git pull');
 	stream.writeNl(__dirname);
 	stream.writeNl(root);
 	stream.writeNl('-----DIR');
@@ -61,7 +61,7 @@ async function restartBg(stream, root, fastly) {
 			fastly.close(() => {
 				// stream.writeNl('Successfully closed');
 				console.log('[WARNING] Exiting');
-				spawnPromise(null, 'node', [path.resolve(root, 'server')], { detached: true })
+				spawnPromise(null, 'node', [path.resolve(root, 'server')], { detached: true, cwd: root })
 					.then(proc => {
 						proc.unref();
 						process.exit(0);
@@ -75,10 +75,21 @@ async function restartBg(stream, root, fastly) {
 	return task;
 }
 
+async function buildWeb(stream, root) {
+	stream.writeNl('+++++DIR yarn build');
+	stream.writeNl(__dirname);
+	stream.writeNl(root);
+	stream.writeNl('-----DIR');
+
+	await spawnPromise(stream, 'yarn', ['bulid'], { cwd: root });
+	return;
+}
+
 const taskQueue = async (stream, fastly) => {
 	const root = path.resolve(__dirname, './../..');
 	
 	await update(stream, root);
+	await buildWeb(stream, root);
 	await restartBg(stream, root, fastly);
 
 	stream.write('Ending');
