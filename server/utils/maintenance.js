@@ -47,7 +47,7 @@ async function update(stream, root) {
 	stream.writeNl(root);
 	stream.writeNl('-----DIR');
 
-	await spawnPromise(stream, 'git', ['pull', root]);
+	await spawnPromise(stream, 'git', ['pull']);
 	return;
 }
 
