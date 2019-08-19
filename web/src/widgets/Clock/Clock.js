@@ -38,7 +38,7 @@ const Clock = ({ day, month, year, hour, min, sec, styles }) => {
 					<span>&nbsp;</span>
 					<span>{month}</span>
 					<span>&nbsp;</span>
-					<span>20{year}</span>
+					<span>'{year}</span>
 				</div>
 				<div>
 					<span>{hour}</span>
