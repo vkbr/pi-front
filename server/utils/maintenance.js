@@ -82,7 +82,7 @@ async function buildWeb(stream, root) {
 	stream.writeNl(`WEB: ${root}/web...`);
 	stream.writeNl('-----DIR');
 
-	await spawnPromise(stream, 'yarn', ['bulid'], { cwd: `${root}/web` });
+	await spawnPromise(stream, 'yarn', ['build'], { cwd: `${root}/web` });
 	return;
 }
 
